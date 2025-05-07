@@ -71,21 +71,6 @@ export const Hero: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-3 sm:space-y-0 sm:space-x-4 mb-6 md:mb-8">
-              <a 
-                href="#use-cases" 
-                className="flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 rounded-lg bg-[#f8ec17] text-[#045462] font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white hover:shadow-lg hover:shadow-[#f8ec17]/20 group"
-              >
-                Explore Use Cases
-                <ArrowRight className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
-              </a>
-              
-              <a 
-                href="#steps" 
-                className="flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 rounded-lg border border-[#f8ec17]/30 text-[#f8ec17] font-medium text-base sm:text-lg transition-all duration-300 hover:bg-[#f8ec17]/10 group"
-              >
-                <Terminal className="mr-2 h-5 w-5" />
-                Get Started
-              </a>
             </div>
             
             <div className="hidden md:flex items-center text-white/50 text-sm">
