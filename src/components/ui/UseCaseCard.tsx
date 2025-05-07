@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Plus, Minus, ExternalLink } from 'lucide-react';
+import { ArrowRight, ChevronDown, ExternalLink } from 'lucide-react';
 
 interface Link {
   label: string;
@@ -14,6 +14,7 @@ interface UseCaseCardProps {
   benefits: string[];
   links: Link[];
   isActive: boolean;
+  index: number;
   onClick: () => void;
 }
 
@@ -25,100 +26,101 @@ export const UseCaseCard: React.FC<UseCaseCardProps> = ({
   benefits,
   links,
   isActive,
+  index,
   onClick,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  
-  const toggleExpand = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsExpanded(!isExpanded);
-  };
+  const [isHovered, setIsHovered] = useState(false);
   
   return (
     <div 
       className={`
-        group relative overflow-hidden rounded-xl transition-all duration-300 cursor-pointer bg-white
-        ${isExpanded ? 
-          'col-span-1 md:col-span-2 lg:col-span-3 row-span-2' : 
-          'hover:shadow-lg hover:shadow-[#f8ec17]/10'
-        }
+        w-full bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300
+        ${isActive ? 'ring-2 ring-[#f8ec17] shadow-lg shadow-[#f8ec17]/10' : 'hover:bg-white/15'}
       `}
-      onClick={isExpanded ? () => {} : onClick}
+      onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="absolute top-0 right-0 w-[3px] h-full bg-[#f8ec17]" />
-      
-      <div className="relative z-10 p-6">
-        <div className="flex justify-between items-start">
-          <div className="flex items-center">
-            <div className="mr-3 bg-[#045462] p-2 rounded-lg">
-              {icon}
-            </div>
-            <h3 className="text-xl font-semibold text-[#045462]">{title}</h3>
+      <div className="flex items-center space-x-4 p-5">
+        <div className={`
+          w-12 h-12 rounded-full flex items-center justify-center transition-all 
+          ${isActive ? 'bg-[#f8ec17]' : 'bg-white/20'}
+        `}>
+          <div className={isActive ? 'text-[#045462]' : 'text-[#f8ec17]'}>
+            {icon}
           </div>
-          <button 
-            onClick={toggleExpand}
-            className="bg-[#045462] p-2 rounded-full hover:bg-[#045462]/90 transition-colors"
-          >
-            {isExpanded ? 
-              <Minus className="h-4 w-4 text-[#f8ec17]" /> : 
-              <Plus className="h-4 w-4 text-[#f8ec17]" />
-            }
-          </button>
         </div>
         
-        <p className="mt-4 text-[#045462]/80">{description}</p>
+        <div className="flex-1">
+          <h3 className="text-xl font-semibold text-white">{title}</h3>
+          <p className={`
+            text-sm text-white/70 transition-all duration-300 overflow-hidden
+            ${isActive ? 'max-h-0 opacity-0' : 'max-h-20 mt-1 opacity-100'}
+          `}>
+            {description}
+          </p>
+        </div>
         
-        {isExpanded && (
-          <>
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="col-span-1">
+        <div className={`
+          w-8 h-8 rounded-full flex items-center justify-center
+          ${isActive ? 'bg-[#f8ec17] text-[#045462]' : 'bg-white/20 text-white'}
+          transition-all duration-300
+        `}>
+          <ChevronDown 
+            className={`w-5 h-5 transition-transform duration-300 ${isActive ? 'rotate-180' : ''}`} 
+          />
+        </div>
+      </div>
+      
+      {isActive && (
+        <div className="bg-white text-[#045462] p-6 animate-fadeIn">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+            <div className="md:col-span-4">
+              <div className="relative h-60 rounded-lg overflow-hidden shadow-md">
                 <img 
                   src={image} 
                   alt={title} 
-                  className="w-full h-48 object-cover rounded-lg"
+                  className="w-full h-full object-cover transition-transform hover:scale-105 duration-700"
                 />
-              </div>
-              <div className="md:col-span-2">
-                <h4 className="text-lg font-medium mb-3 text-[#045462]">Key Benefits</h4>
-                <ul className="space-y-2">
-                  {benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="bg-[#f8ec17]/20 text-[#045462] p-1 rounded-full mr-2 mt-0.5">
-                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </span>
-                      <span className="text-[#045462]/80">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {links.map((link, index) => (
-                    <a 
-                      key={index}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center px-4 py-2 rounded-lg bg-[#045462] text-[#f8ec17] hover:bg-[#045462]/90 transition-colors"
-                    >
-                      {link.label}
-                      <ExternalLink className="ml-2 h-4 w-4" />
-                    </a>
-                  ))}
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#045462]/70 to-transparent opacity-50"></div>
               </div>
             </div>
-          </>
-        )}
-        
-        {!isExpanded && (
-          <div className="mt-4 flex items-center text-sm text-[#045462] group-hover:translate-x-1 transition-transform">
-            <span>Learn more</span>
-            <ArrowRight className="ml-1 h-4 w-4" />
+            
+            <div className="md:col-span-8">
+              <h4 className="text-lg font-semibold text-[#045462] mb-4 flex items-center">
+                <span className="w-4 h-4 bg-[#f8ec17] mr-3 rounded"></span>
+                Key Benefits
+              </h4>
+              
+              <div className="space-y-4 mb-6">
+                {benefits.map((benefit, index) => (
+                  <div key={index} className="flex">
+                    <div className="flex-shrink-0 w-7 h-7 rounded-full bg-[#045462]/10 flex items-center justify-center mr-3">
+                      <span className="text-sm font-semibold text-[#045462]">{index + 1}</span>
+                    </div>
+                    <p className="text-[#045462]/80">{benefit}</p>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="flex flex-wrap gap-3 mt-6">
+                {links.map((link, index) => (
+                  <a 
+                    key={index}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#045462] text-white hover:bg-[#045462]/90 transition-all hover:translate-y-[-2px] text-sm font-medium"
+                  >
+                    {link.label}
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
