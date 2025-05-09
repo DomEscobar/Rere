@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { SUPPORTED_LANGUAGES, SupportedLanguage, loadTranslations, t } from './i18n';
+import { SUPPORTED_LANGUAGES, SupportedLanguage, loadTranslations, t, preloadTranslations } from './i18n';
 
 // Create I18n context
 interface I18nContextType {
@@ -16,6 +16,7 @@ const I18nContext = createContext<I18nContextType | null>(null);
 interface I18nProviderProps {
   initialLang?: SupportedLanguage;
   children: React.ReactNode;
+  preload?: boolean;
 }
 
 // Loading component
@@ -65,13 +66,26 @@ const LoadingScreen: React.FC = () => (
 // I18nProvider component
 export const I18nProvider: React.FC<I18nProviderProps> = ({
   initialLang = 'en',
-  children
+  children,
+  preload = false
 }) => {
   const [currentLang, setCurrentLang] = useState<SupportedLanguage>(
     // Try to get from localStorage or use initialLang
     (localStorage.getItem('language') as SupportedLanguage) || initialLang
   );
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  // Preload all translations on initial mount if preload is true
+  useEffect(() => {
+    if (preload) {
+      const preloadAllTranslations = async () => {
+        await preloadTranslations();
+        setIsLoaded(true);
+      };
+      
+      preloadAllTranslations();
+    }
+  }, [preload]);
 
   // Save language preference to localStorage when it changes
   useEffect(() => {
@@ -81,12 +95,18 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
   // Load translations for the current language
   useEffect(() => {
     const loadLanguage = async () => {
+      const startTime = performance.now();
       await loadTranslations(currentLang);
+      const loadTime = performance.now() - startTime;
+      console.log(`Loaded ${currentLang} translations in ${loadTime.toFixed(2)}ms`);
       setIsLoaded(true);
     };
 
-    loadLanguage();
-  }, [currentLang]);
+    if (!preload) {
+      setIsLoaded(false);
+      loadLanguage();
+    }
+  }, [currentLang, preload]);
 
   // Create the translation function for the current language
   const translate = (key: string, replacements: Record<string, string> = {}) => {

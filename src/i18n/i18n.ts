@@ -11,11 +11,41 @@ let translations: Record<SupportedLanguage, any> = {
   de: {}
 };
 
+// Cache key for session storage
+const CACHE_KEY_PREFIX = 'i18n_translations_';
+
 // Function to load translations for a language
 export const loadTranslations = async (lang: SupportedLanguage): Promise<void> => {
+  // Try to get from session cache first
+  try {
+    const cachedData = sessionStorage.getItem(`${CACHE_KEY_PREFIX}${lang}`);
+    
+    if (cachedData) {
+      const parsedData = JSON.parse(cachedData);
+      translations[lang] = parsedData;
+      console.log(`Loaded translations for ${lang} from cache`);
+      return;
+    }
+  } catch (error) {
+    console.warn('Failed to read from session storage:', error);
+    // Continue with normal loading if cache fails
+  }
+
+  // If not in cache, load from file
   try {
     const module = await import(`./locales/${lang}.json`);
     translations[lang] = module.default || module;
+    
+    // Store in session cache
+    try {
+      sessionStorage.setItem(
+        `${CACHE_KEY_PREFIX}${lang}`, 
+        JSON.stringify(translations[lang])
+      );
+      console.log(`Cached translations for ${lang} in session storage`);
+    } catch (cacheError) {
+      console.warn('Failed to cache translations in session storage:', cacheError);
+    }
   } catch (error) {
     console.error(`Failed to load translations for ${lang}:`, error);
     // Fall back to English if loading fails
@@ -23,6 +53,17 @@ export const loadTranslations = async (lang: SupportedLanguage): Promise<void> =
       await loadTranslations('en');
     }
   }
+};
+
+// Clear translation cache
+export const clearTranslationCache = (): void => {
+  SUPPORTED_LANGUAGES.forEach(lang => {
+    try {
+      sessionStorage.removeItem(`${CACHE_KEY_PREFIX}${lang}`);
+    } catch (error) {
+      console.warn(`Failed to clear cache for ${lang}:`, error);
+    }
+  });
 };
 
 // Get translation for a key using dot notation (e.g., 'navbar.navItems.useCases')
