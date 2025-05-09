@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Cpu, Menu, X, ChevronRight } from 'lucide-react';
+import { useI18n } from '../i18n/I18nProvider';
+import { LanguageSwitcher } from './ui/LanguageSwitcher';
 
 export const Navbar: React.FC = () => {
+  const { t } = useI18n();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -44,10 +47,10 @@ export const Navbar: React.FC = () => {
   }, [isMobileMenuOpen]);
 
   const navItems = [
-    { name: 'Use Cases', href: '#use-cases' },
-    { name: 'Demos', href: '#demos' },
-    { name: 'FAQs', href: '#faqs' },
-    { name: 'Team', href: '#team' },
+    { name: t('navbar.navItems.useCases'), href: '#use-cases' },
+    { name: t('navbar.navItems.demos'), href: '#demos' },
+    { name: t('navbar.navItems.faqs'), href: '#faqs' },
+    { name: t('navbar.navItems.team'), href: '#team' },
   ];
 
   const handleNavItemClick = () => {
@@ -84,15 +87,18 @@ export const Navbar: React.FC = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden sm:block">
+          {/* Right side elements: CTA Button and Language Switcher */}
+          <div className="hidden sm:flex items-center space-x-4">
             <a
               href="#steps"
               className="inline-flex items-center px-5 py-2.5 border border-transparent rounded-full text-sm font-medium text-[#045462] bg-[#f8ec17] hover:bg-white transition-all duration-200 hover:shadow-lg hover:shadow-[#f8ec17]/20 group"
             >
-              Get Started
+              {t('navbar.cta.getStarted')}
               <ChevronRight className="ml-1 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
             </a>
+            
+            {/* Language Switcher */}
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Menu Button */}
@@ -102,7 +108,7 @@ export const Navbar: React.FC = () => {
             className="lg:hidden flex items-center justify-center p-2 rounded-md text-white/90 hover:text-[#f8ec17] hover:bg-white/10 transition-colors"
             aria-expanded={isMobileMenuOpen}
           >
-            <span className="sr-only">Open main menu</span>
+            <span className="sr-only">{t('navbar.srOnly.openMainMenu')}</span>
             {isMobileMenuOpen ? (
               <X className="h-6 w-6" />
             ) : (
@@ -134,13 +140,18 @@ export const Navbar: React.FC = () => {
               </a>
             ))}
 
+            {/* Mobile Language Switcher */}
+            <div className="px-4 py-4 border-b border-white/10">
+              <LanguageSwitcher />
+            </div>
+
             <div className="mt-8 pt-8 border-t border-white/10">
               <a
                 href="#steps"
                 onClick={handleNavItemClick}
                 className="flex items-center justify-center px-6 py-3 rounded-full text-[#045462] bg-[#f8ec17] hover:bg-white transition-all duration-200 font-medium text-lg w-full"
               >
-                Get Started
+                {t('navbar.cta.getStarted')}
                 <ChevronRight className="ml-2 h-5 w-5" />
               </a>
             </div>

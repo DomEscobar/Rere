@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight, ChevronDown, ExternalLink } from 'lucide-react';
+import { useI18n } from '../../i18n/I18nProvider';
 
 interface Link {
   label: string;
@@ -29,6 +30,7 @@ export const UseCaseCard: React.FC<UseCaseCardProps> = ({
   index,
   onClick,
 }) => {
+  const { t } = useI18n();
   const [isHovered, setIsHovered] = useState(false);
   
   return (
@@ -89,7 +91,7 @@ export const UseCaseCard: React.FC<UseCaseCardProps> = ({
             <div className="md:col-span-8">
               <h4 className="text-lg font-semibold text-[#045462] mb-4 flex items-center">
                 <span className="w-4 h-4 bg-[#f8ec17] mr-3 rounded"></span>
-                Key Benefits
+                {t('useCases.keyBenefits')}
               </h4>
               
               <div className="space-y-4 mb-6">

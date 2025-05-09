@@ -1,8 +1,12 @@
 import React from 'react';
 import { ArrowRight, Terminal, ChevronRight, CheckCircle } from 'lucide-react';
+import { useI18n } from '../i18n/I18nProvider';
 
 export const GetStarted: React.FC = () => {
-  const steps = [
+  const { t } = useI18n();
+  
+  // Define default steps if translations aren't loaded correctly
+  const defaultSteps = [
     "Request access to Fermyon Wasm Functions via this form: https://fibsu0jcu2g.typeform.com/fwf-preview",
     "Receive confirmation email from Fermyon team",
     "Visit the product docs: developer.fermyon.com/wasm-functions",
@@ -11,6 +15,12 @@ export const GetStarted: React.FC = () => {
     "Login to Fermyon Wasm Functions (via GitHub auth)",
     "Deploy your app with spin aka deploy"
   ];
+  
+  // Try to get steps from translations or use default
+  const steps = (() => {
+    const translatedSteps = t('getStarted.steps');
+    return Array.isArray(translatedSteps) ? translatedSteps : defaultSteps;
+  })();
 
   return (
     <section id="steps" className="py-24 bg-[#045462] font-['Museo Sans'] relative">
@@ -27,16 +37,16 @@ export const GetStarted: React.FC = () => {
           <div className="inline-flex items-center justify-center mb-5">
             <div className="h-px w-8 bg-[#f8ec17]"></div>
             <span className="mx-4 px-4 py-1 bg-[#f8ec17]/20 text-[#f8ec17] text-sm font-bold rounded-full">
-              GET STARTED
+              {t('getStarted.badge')}
             </span>
             <div className="h-px w-8 bg-[#f8ec17]"></div>
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-5 text-white">
-            Follow These Simple Steps
+            {t('getStarted.heading')}
           </h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Get up and running with Fermyon Wasm Functions in just minutes
+            {t('getStarted.description')}
           </p>
         </div>
         
@@ -58,7 +68,7 @@ export const GetStarted: React.FC = () => {
                     
                     {index === 6 && (
                       <p className="mt-3 text-white/60 text-sm pl-8">
-                        Your app will be made available at https://&lt;string&gt;.aka.fermyon.tech
+                        {t('getStarted.appAvailability')}
                       </p>
                     )}
                   </div>
@@ -75,13 +85,13 @@ export const GetStarted: React.FC = () => {
               className="inline-flex items-center px-8 py-4 rounded-full bg-[#f8ec17] text-[#045462] font-medium transition-all duration-300 hover:bg-white hover:shadow-lg hover:shadow-[#f8ec17]/30 group"
             >
               <Terminal className="mr-2 h-5 w-5" />
-              Go to Quickstart Docs
+              {t('getStarted.docsButton')}
               <ChevronRight className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
           
           <p className="text-center mt-6 text-white/60">
-            Note: where content is password protected, use username: <code className="bg-white/10 px-2 py-1 rounded">fermyon</code> password: <code className="bg-white/10 px-2 py-1 rounded">akamai</code>
+            {t('getStarted.note')}
           </p>
         </div>
       </div>

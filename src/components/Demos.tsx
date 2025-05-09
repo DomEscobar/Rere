@@ -1,7 +1,12 @@
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
+import { useI18n } from '../i18n/I18nProvider';
 
 export const Demos: React.FC = () => {
+  const { t } = useI18n();
+  
+  // Since the demos data is complex, let's add it to the translations file
+  // We'll access it through the i18n system
   const demos = [
     {
       title: "Fermyon Wasm Functions Demo",
@@ -39,9 +44,9 @@ export const Demos: React.FC = () => {
     <section id="demos" className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#045462]">Demos</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#045462]">{t('demos.heading', { defaultValue: 'Demos' })}</h2>
           <p className="text-xl text-[#045462]/80 max-w-3xl mx-auto">
-            See Fermyon Wasm Functions in action with these demos and tutorials
+            {t('demos.description', { defaultValue: 'See Fermyon Wasm Functions in action with these demos and tutorials' })}
           </p>
         </div>
         
@@ -77,7 +82,7 @@ export const Demos: React.FC = () => {
                 </h3>
                 <p className="text-[#045462]/60 mb-3">{demo.description}</p>
                 <div className="flex items-center text-[#f8ec17] text-sm font-medium">
-                  <span>View Demo</span>
+                  <span>{t('demos.viewDemoButton', { defaultValue: 'View Demo' })}</span>
                   <ExternalLink className="ml-1 h-4 w-4" />
                 </div>
               </div>
@@ -92,7 +97,7 @@ export const Demos: React.FC = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 rounded-lg bg-[#045462] text-[#f8ec17] hover:bg-[#045462]/90 transition-colors"
           >
-            View more examples on GitHub
+            {t('demos.viewMoreButton', { defaultValue: 'View more examples on GitHub' })}
             <ExternalLink className="ml-2 h-4 w-4" />
           </a>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { useI18n } from '../i18n/I18nProvider';
 
 interface FAQItem {
   question: string;
@@ -7,9 +8,11 @@ interface FAQItem {
 }
 
 export const FAQ: React.FC = () => {
+  const { t } = useI18n();
   const [openItems, setOpenItems] = useState<number[]>([]);
   
-  const faqItems: FAQItem[] = [
+  // Define default FAQ items if translations aren't loaded correctly
+  const defaultFaqItems: FAQItem[] = [
     {
       question: "How are Wasm Functions different than EdgeWorkers?",
       answer: "Fermyon Wasm Functions and EdgeWorkers are both event-driven serverless compute products, but Fermyon Wasm Functions uses WebAssembly to deliver exceptionally fast cold start times and a strong security model. For EdgeWorkers customers looking to optimize performance on compute-intensive tasks, Fermyon Wasm Functions can complement their existing workflows by providing enhanced speed and efficiency to decrease end user latency."
@@ -28,6 +31,12 @@ export const FAQ: React.FC = () => {
     }
   ];
   
+  // Try to get FAQ items from translations or use default
+  const faqItems = (() => {
+    const translatedItems = t('faq.items');
+    return Array.isArray(translatedItems) ? translatedItems : defaultFaqItems;
+  })();
+  
   const toggleItem = (index: number) => {
     if (openItems.includes(index)) {
       setOpenItems(openItems.filter(item => item !== index));
@@ -40,9 +49,9 @@ export const FAQ: React.FC = () => {
     <section id="faqs" className="py-20 bg-[#045462]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#f8ec17]">Frequently Asked Questions</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[#f8ec17]">{t('faq.heading')}</h2>
           <p className="text-xl text-white/80 max-w-3xl mx-auto">
-            Get answers to common questions about Fermyon Wasm Functions
+            {t('faq.description')}
           </p>
         </div>
         
@@ -81,7 +90,7 @@ export const FAQ: React.FC = () => {
             href="./faqs" 
             className="inline-flex items-center text-[#f8ec17] hover:text-[#f8e614] transition-colors"
           >
-            Read more Frequently Asked Questions
+            {t('faq.readMore')}
             <ChevronDown className="h-4 w-4 ml-1 transform rotate-270" />
           </a>
         </div>

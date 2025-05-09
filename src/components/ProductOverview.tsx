@@ -1,7 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { CheckCircle, Zap, ShieldCheck, Globe, Code, Package2, ChevronRight, ArrowRight } from 'lucide-react';
+import { useI18n } from '../i18n/I18nProvider';
 
 export const ProductOverview: React.FC = () => {
+  const { t } = useI18n();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   
@@ -26,38 +28,73 @@ export const ProductOverview: React.FC = () => {
     };
   }, []);
 
-  const benefits = [
+  // Define default benefits if translations aren't loaded correctly
+  const defaultBenefits = [
     {
-      icon: <Zap className="h-6 w-6 text-[#045462]" />,
       title: "Incredibly Fast Compute",
       description: "Millisecond-level execution times for superior performance at the edge."
     },
     {
-      icon: <CheckCircle className="h-6 w-6 text-[#045462]" />,
       title: "No Cold Starts",
       description: "Instant initialization without the delays traditional serverless functions experience."
     },
     {
-      icon: <Package2 className="h-6 w-6 text-[#045462]" />,
       title: "No Add-on Infra Costs",
       description: "Everything included in one platform without hidden infrastructure expenses."
     },
     {
-      icon: <Code className="h-6 w-6 text-[#045462]" />,
       title: "Broader Language Support",
       description: "Write functions in JavaScript, Rust, Go, Python, and other languages compiled to WebAssembly."
     },
     {
-      icon: <Globe className="h-6 w-6 text-[#045462]" />,
       title: "Scales from Edge to Core",
       description: "Consistent deployment model whether running at the edge or in core infrastructure."
     },
     {
-      icon: <ShieldCheck className="h-6 w-6 text-[#045462]" />,
       title: "Secure by Default",
       description: "WebAssembly's sandboxed execution environment provides strong security guarantees."
     }
   ];
+
+  // Try to get benefits from translations or use default
+  const benefits = (() => {
+    const translatedBenefits = t('productOverview.benefits.items');
+    return Array.isArray(translatedBenefits) ? translatedBenefits : defaultBenefits;
+  })();
+
+  // Map the benefits array with appropriate icons
+  const benefitsWithIcons = benefits.map((benefit, index) => {
+    let icon;
+    
+    // Add icons based on index (or title if we want to be more specific)
+    switch (index) {
+      case 0: 
+        icon = <Zap className="h-6 w-6 text-[#045462]" />;
+        break;
+      case 1:
+        icon = <CheckCircle className="h-6 w-6 text-[#045462]" />;
+        break;
+      case 2:
+        icon = <Package2 className="h-6 w-6 text-[#045462]" />;
+        break;
+      case 3:
+        icon = <Code className="h-6 w-6 text-[#045462]" />;
+        break;
+      case 4:
+        icon = <Globe className="h-6 w-6 text-[#045462]" />;
+        break;
+      case 5:
+        icon = <ShieldCheck className="h-6 w-6 text-[#045462]" />;
+        break;
+      default:
+        icon = <CheckCircle className="h-6 w-6 text-[#045462]" />;
+    }
+    
+    return {
+      ...benefit,
+      icon
+    };
+  });
 
   return (
     <section id="product-overview" className="py-24 bg-white font-['Museo Sans']" ref={sectionRef}>
@@ -67,22 +104,20 @@ export const ProductOverview: React.FC = () => {
           <div className="inline-flex items-center justify-center mb-5">
             <div className="h-px w-8 bg-[#f8ec17]"></div>
             <span className="mx-4 px-4 py-1 bg-[#045462] text-[#f8ec17] text-sm font-bold rounded">
-              PRODUCT OVERVIEW
+              {t('productOverview.badge')}
             </span>
             <div className="h-px w-8 bg-[#f8ec17]"></div>
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-5 text-[#045462]">
-            Faster Edge Computing <span className="text-[#045462] relative">
+            {t('productOverview.heading.main')} <span className="text-[#045462] relative">
               <span className="absolute -bottom-2 left-0 right-0 h-1 bg-[#f8ec17]"></span>
-              Without Limits
+              {t('productOverview.heading.accent')}
             </span>
           </h2>
           
           <p className="text-xl text-[#045462]/80 max-w-3xl mx-auto leading-relaxed">
-            Fermyon Wasm Functions delivers faster code execution at runtime, extending and accelerating 
-            CDNs beyond static caching - enabling dynamic, personalized content and real-time processing 
-            at the edge.
+            {t('productOverview.description')}
           </p>
         </div>
         
@@ -96,24 +131,24 @@ export const ProductOverview: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-[#f8ec17]/5 via-[#045462]/5 to-transparent rounded-2xl transform scale-105 blur-sm"></div>
             <div className="relative bg-white rounded-2xl p-8 shadow-lg border border-[#045462]/10">
               <h3 className="text-2xl font-bold mb-8 text-[#045462] text-center">
-                Performance Comparison <span className="text-[#f8ec17]">(Response Time in ms)</span>
+                {t('productOverview.performance.heading')} <span className="text-[#f8ec17]">{t('productOverview.performance.unit')}</span>
               </h3>
               
               {/* Traditional Serverless */}
               <div className="mb-12">
                 <div className="flex items-center mb-2">
-                  <h4 className="text-xl font-medium text-[#045462] mr-auto">Standard Serverless Functions</h4>
-                  <span className="text-sm text-[#045462]/70 font-medium">400ms</span>
+                  <h4 className="text-xl font-medium text-[#045462] mr-auto">{t('productOverview.performance.traditional.title')}</h4>
+                  <span className="text-sm text-[#045462]/70 font-medium">{t('productOverview.performance.traditional.time')}</span>
                 </div>
                 <div className="h-16 bg-[#045462]/5 rounded-lg overflow-hidden relative">
                   <div className="absolute top-0 bottom-0 left-0 w-[55%] bg-[#045462] rounded-l-lg flex items-center justify-center">
-                    <span className="text-white font-medium text-sm">Network Time</span>
+                    <span className="text-white font-medium text-sm">{t('productOverview.performance.traditional.network')}</span>
                   </div>
                   <div className="absolute top-0 bottom-0 left-[55%] right-0 bg-[#f8ec17] rounded-r-lg flex items-center justify-center">
-                    <span className="text-[#045462] font-medium text-sm">Compute Time</span>
+                    <span className="text-[#045462] font-medium text-sm">{t('productOverview.performance.traditional.compute')}</span>
                   </div>
                 </div>
-                <div className="text-right text-xs text-[#045462]/60 mt-1">AWS Lambda, Azure Functions, etc</div>
+                <div className="text-right text-xs text-[#045462]/60 mt-1">{t('productOverview.performance.traditional.note')}</div>
               </div>
               
               {/* Fermyon Improvement */}
@@ -121,21 +156,21 @@ export const ProductOverview: React.FC = () => {
                 <div className="flex items-center mb-2">
                   <h4 className="text-xl font-medium text-[#045462] mr-auto flex items-center">
                     <span className="inline-block w-2 h-2 bg-[#f8ec17] mr-2 rounded-full"></span>
-                    Fermyon cuts down the compute time
+                    {t('productOverview.performance.fermyon.title')}
                   </h4>
-                  <span className="text-sm text-[#045462]/70 font-medium">~220ms</span>
+                  <span className="text-sm text-[#045462]/70 font-medium">{t('productOverview.performance.fermyon.time')}</span>
                 </div>
                 <div className="h-16 bg-[#045462]/5 rounded-lg overflow-hidden relative">
                   <div className="absolute top-0 bottom-0 left-0 w-[55%] bg-[#045462] rounded-l-lg flex items-center justify-center">
-                    <span className="text-white font-medium text-sm">Network Time</span>
+                    <span className="text-white font-medium text-sm">{t('productOverview.performance.traditional.network')}</span>
                   </div>
                   <div className="absolute top-0 bottom-0 left-[55%] w-[15%] bg-[#f8ec17] rounded-r-lg flex items-center justify-center">
-                    <span className="text-[#045462] font-medium text-xs">Compute</span>
+                    <span className="text-[#045462] font-medium text-xs">{t('productOverview.performance.traditional.compute')}</span>
                   </div>
                   <div className="absolute top-0 bottom-0 left-[73%] flex items-center pl-4">
                     <div className="flex items-center">
                       <ArrowRight className="h-5 w-5 text-[#045462]" />
-                      <span className="font-medium text-[#045462] ml-2">75% Faster Compute</span>
+                      <span className="font-medium text-[#045462] ml-2">{t('productOverview.performance.fermyon.advantage')}</span>
                     </div>
                   </div>
                 </div>
@@ -146,42 +181,40 @@ export const ProductOverview: React.FC = () => {
                 <div className="flex items-center mb-2">
                   <h4 className="text-xl font-medium text-[#045462] mr-auto flex items-center">
                     <span className="inline-block w-2 h-2 bg-[#f8ec17] mr-2 rounded-full"></span>
-                    Edge CDN cuts down network time
+                    {t('productOverview.performance.edge.title')}
                   </h4>
-                  <span className="text-sm text-[#045462]/70 font-medium">~100ms</span>
+                  <span className="text-sm text-[#045462]/70 font-medium">{t('productOverview.performance.edge.time')}</span>
                 </div>
                 <div className="h-16 bg-[#045462]/5 rounded-lg overflow-hidden relative">
                   <div className="absolute top-0 bottom-0 left-0 w-[15%] bg-[#045462] rounded-l-lg flex items-center justify-center">
-                    <span className="text-white font-medium text-xs">Network</span>
+                    <span className="text-white font-medium text-xs">{t('productOverview.performance.traditional.network').split(' ')[0]}</span>
                   </div>
                   <div className="absolute top-0 bottom-0 left-[15%] w-[15%] bg-[#f8ec17] rounded-r-lg flex items-center justify-center">
-                    <span className="text-[#045462] font-medium text-xs">Compute</span>
+                    <span className="text-[#045462] font-medium text-xs">{t('productOverview.performance.traditional.compute').split(' ')[0]}</span>
                   </div>
                   <div className="absolute top-0 bottom-0 left-[33%] flex items-center pl-4">
                     <div className="flex items-center">
                       <ArrowRight className="h-5 w-5 text-[#045462]" />
-                      <span className="font-medium text-[#045462] ml-2">75% Faster Overall</span>
+                      <span className="font-medium text-[#045462] ml-2">{t('productOverview.performance.edge.advantage')}</span>
                     </div>
                   </div>
                 </div>
               </div>
               
               <div className="flex items-center mt-10">
-                <div className="text-sm font-medium text-[#045462]">0 msec</div>
+                <div className="text-sm font-medium text-[#045462]">{t('productOverview.performance.scale.start')}</div>
                 <div className="flex-1 mx-4 relative h-1 bg-[#045462]/10 rounded">
                   <div className="absolute h-2 w-2 rounded-full bg-[#f8ec17] top-1/2 -translate-y-1/2" style={{ left: '25%' }}></div>
                   <div className="absolute h-2 w-2 rounded-full bg-[#f8ec17] top-1/2 -translate-y-1/2" style={{ left: '50%' }}></div>
                   <div className="absolute h-2 w-2 rounded-full bg-[#f8ec17] top-1/2 -translate-y-1/2" style={{ left: '75%' }}></div>
                 </div>
-                <div className="text-sm font-medium text-[#045462]">400 msec</div>
+                <div className="text-sm font-medium text-[#045462]">{t('productOverview.performance.scale.end')}</div>
               </div>
             </div>
           </div>
           
           <p className="text-center text-base text-[#045462]/70 mt-8 max-w-3xl mx-auto">
-            These performance advantages enable new edge-native use cases on Stackit, outshining 
-            market solutions like Cloudflare Workers and Fastly Compute@Edge with 
-            faster cold starts, broader language support, and deeper Stackit integration.
+            {t('productOverview.performance.footnote')}
           </p>
         </div>
         
@@ -190,11 +223,11 @@ export const ProductOverview: React.FC = () => {
           <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#f8ec17] to-transparent"></div>
           
           <h3 className="text-2xl font-bold text-center mb-16 text-[#045462] relative -top-5 bg-white inline-block px-8 mx-auto">
-            Key Benefits
+            {t('productOverview.benefits.heading')}
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-8">
-            {benefits.map((benefit, index) => (
+            {benefitsWithIcons.map((benefit, index) => (
               <div 
                 key={index}
                 className={`
@@ -231,7 +264,7 @@ export const ProductOverview: React.FC = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center px-10 py-4 rounded-lg bg-[#045462] text-[#f8ec17] hover:bg-[#045462]/90 transition-all duration-200 hover:shadow-lg hover:shadow-[#f8ec17]/20 text-lg font-medium group"
           >
-            View the Complete Deck
+            {t('productOverview.cta')}
             <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </a>
         </div>

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { UseCaseCard } from './ui/UseCaseCard';
 import { ChevronRight, Cloud, Activity, Github as Git, Shield, Network, Lightbulb, Zap, Boxes } from 'lucide-react';
+import { useI18n } from '../i18n/I18nProvider';
 
 export const UseCases: React.FC = () => {
+  const { t } = useI18n();
   const [activeCase, setActiveCase] = useState(0);
   
-  const useCases = [
+  // Define default use cases if translations aren't loaded correctly
+  const defaultUseCases = [
     {
       title: "Better Than CloudFlare Workers",
       icon: <Cloud className="h-6 w-6" />,
@@ -88,6 +91,43 @@ export const UseCases: React.FC = () => {
     }
   ];
   
+  // Try to get use cases from translations or use default
+  const useCases = (() => {
+    const translatedUseCases = t('useCases.items');
+    return Array.isArray(translatedUseCases) ? translatedUseCases : defaultUseCases;
+  })();
+
+  // Add icons to use cases
+  const useCasesWithIcons = useCases.map((useCase, index) => {
+    let icon;
+    
+    // Add icons based on index
+    switch (index) {
+      case 0: 
+        icon = <Cloud className="h-6 w-6" />;
+        break;
+      case 1:
+        icon = <Activity className="h-6 w-6" />;
+        break;
+      case 2:
+        icon = <Git className="h-6 w-6" />;
+        break;
+      case 3:
+        icon = <Shield className="h-6 w-6" />;
+        break;
+      case 4:
+        icon = <Network className="h-6 w-6" />;
+        break;
+      default:
+        icon = <Lightbulb className="h-6 w-6" />;
+    }
+    
+    return {
+      ...useCase,
+      icon
+    };
+  });
+  
   return (
     <section id="use-cases" className="py-24 bg-gradient-to-b from-[#045462] to-[#033b44] relative">
       {/* Decorative elements */}
@@ -98,21 +138,21 @@ export const UseCases: React.FC = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center justify-center p-1 rounded-full bg-white/10 backdrop-blur-sm mb-4">
             <span className="px-6 py-1.5 rounded-full bg-[#f8ec17]/20 text-[#f8ec17] text-sm font-medium">
-              EXPLORE OUR SOLUTIONS
+              {t('useCases.badge')}
             </span>
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            <span className="text-[#f8ec17]">Powerful</span> Use Cases
+            <span className="text-[#f8ec17]">{t('useCases.heading.accent')}</span> {t('useCases.heading.main')}
           </h2>
           
           <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            Discover how Fermyon Wasm Functions transform edge computing with these real-world solutions
+            {t('useCases.description')}
           </p>
         </div>
         
         <div className="max-w-4xl mx-auto space-y-3">
-          {useCases.map((useCase, index) => (
+          {useCasesWithIcons.map((useCase, index) => (
             <UseCaseCard 
               key={index}
               index={index}
@@ -135,7 +175,7 @@ export const UseCases: React.FC = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center px-8 py-4 rounded-full bg-[#f8ec17] text-[#045462] hover:bg-white transition-all hover:shadow-lg hover:shadow-[#f8ec17]/20 font-medium"
           >
-            Browse More Examples
+            {t('useCases.viewMoreButton')}
             <ChevronRight className="h-5 w-5 ml-2" />
           </a>
         </div>

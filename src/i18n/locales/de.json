@@ -1,0 +1,244 @@
+{
+  "navbar": {
+    "navItems": {
+      "useCases": "Anwendungsfälle",
+      "demos": "Demos",
+      "faqs": "FAQs",
+      "team": "Team"
+    },
+    "cta": {
+      "getStarted": "Loslegen"
+    },
+    "srOnly": {
+      "openMainMenu": "Hauptmenü öffnen"
+    }
+  },
+  "hero": {
+    "badge": {
+      "new": "NEU",
+      "text": "WebAssembly Edge-Funktionen"
+    },
+    "heading": {
+      "line1": "Hochleistungs-",
+      "line2": "serverlose Funktionen",
+      "line3": "auf Stackit, betrieben durch WebAssembly."
+    },
+    "description": "Bieten Sie Ihren Kunden schnellere, leistungsstärkere Edge-Berechnungen mit längeren Anfragen, mehr Speicher, integriertem Speicher und Leistung im Submillisekunden-Bereich.",
+    "scrollCta": "Scrollen Sie nach unten, um mehr zu erfahren",
+    "codeExample": {
+      "filename": "serverless-function.rs",
+      "stats": {
+        "memory": "Speicher: 128MB",
+        "runtime": "Laufzeit: 0,65 ms",
+        "type": "WebAssembly"
+      }
+    }
+  },
+  "useCases": {
+    "badge": "ENTDECKEN SIE UNSERE LÖSUNGEN",
+    "heading": {
+      "accent": "Leistungsstarke",
+      "main": "Anwendungsfälle"
+    },
+    "description": "Entdecken Sie, wie Fermyon Wasm Functions Edge-Computing mit diesen realen Lösungen transformiert",
+    "viewMoreButton": "Weitere Beispiele durchsuchen",
+    "keyBenefits": "Hauptvorteile",
+    "items": [
+      {
+        "title": "Besser als CloudFlare Workers",
+        "description": "Ein Kunde wünscht sich die Geschwindigkeit und Funktionen von Cloudflare Workers oder Fastly Compute@Edge gegenüber Stackit EdgeWorkers.",
+        "image": "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "benefits": [
+          "Leistung im Submillisekunden-Bereich",
+          "Längere Anfrage-Laufzeiten",
+          "Mehr Speicherzuweisung",
+          "Integrierte Speicherfunktionen"
+        ],
+        "links": [
+          { "label": "PDF herunterladen", "url": "https://drive.google.com/file/d/1E6r3ZCEk9gHNPs4TzFW5UJrD2BpRwP49/view?usp=sharing" },
+          { "label": "Lösungscode", "url": "https://github.com/fermyon/fwf-examples" }
+        ]
+      },
+      {
+        "title": "KI-Anwendungen",
+        "description": "Ein Kunde möchte KI-Modelle für Text-, Audio-, Video- oder Bildgenerierungsprozesse mit einfachem Zugriff auf GPUs verwenden.",
+        "image": "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "benefits": [
+          "Schnelle KI-Modellinferenz",
+          "GPU-Zugriff für Leistung",
+          "Effiziente Speichernutzung",
+          "Reduzierte Latenz für KI-Operationen"
+        ],
+        "links": [
+          { "label": "PDF herunterladen", "url": "https://drive.google.com/file/d/1uJt5P0ltVvZwf71FMQOnN-lLnn8KoVPp/view?usp=sharing" },
+          { "label": "Lösungscode", "url": "https://github.com/fermyon/fwf-examples" }
+        ]
+      },
+      {
+        "title": "Massenumleitung",
+        "description": "Ein Kunde wünscht sich blitzschnelle Umleitungen, die Millionen von Umschreibungsregeln verarbeiten können, aber in Millisekunden antworten.",
+        "image": "https://images.pexels.com/photos/669996/pexels-photo-669996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "benefits": [
+          "Verarbeitung von Millionen von Umleitungsregeln",
+          "Antwortzeiten in Millisekunden",
+          "Reduzierte Ursprungslast",
+          "Vereinfachte Konfiguration"
+        ],
+        "links": [
+          { "label": "PDF herunterladen", "url": "https://drive.google.com/file/d/1tE64Un47jUsCeJD894AnP1Ya40mIEav/view" },
+          { "label": "Lösungscode", "url": "https://github.com/fermyon/fwf-examples" }
+        ]
+      },
+      {
+        "title": "Erweiterte Bot-Erkennung",
+        "description": "Ein Kunde möchte die Bot-Erkennungslösungen von Stackit erweitern und zusätzliche benutzerdefinierte Logik bei der Erkennung ausführen.",
+        "image": "https://images.pexels.com/photos/5380673/pexels-photo-5380673.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "benefits": [
+          "Benutzerdefinierte Bot-Minderungslogik",
+          "Echtzeit-Bedrohungsanalyse",
+          "Erweiterte Verhaltensmuster",
+          "Reduzierung falsch positiver Ergebnisse"
+        ],
+        "links": [
+          { "label": "PDF herunterladen", "url": "https://drive.google.com/file/d/1xWeD1xzFw_vEGGcLHaYtEsyv8KErYG5P/view" },
+          { "label": "Lösungscode", "url": "https://github.com/fermyon/fwf-examples" }
+        ]
+      },
+      {
+        "title": "Spiegelung von Verkehrsströmen",
+        "description": "Ein Kunde möchte den Verkehr zu einem zusätzlichen Ziel über seinen Ursprung hinaus spiegeln.",
+        "image": "https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "benefits": [
+          "Echtzeit-Verkehrsduplizierung",
+          "Keine Auswirkungen auf die Benutzererfahrung",
+          "Konfigurierbare Filterregeln",
+          "Analytik-Integration"
+        ],
+        "links": [
+          { "label": "PDF herunterladen", "url": "https://drive.google.com/file/d/1JMoAjZIasT1ler6D4XpMl7wEuIDASYII/view?usp=sharing" },
+          { "label": "Lösungscode", "url": "https://github.com/fermyon/fwf-examples/tree/main/samples/traffic-splitting" }
+        ]
+      }
+    ]
+  },
+  "productOverview": {
+    "badge": "PRODUKTÜBERSICHT",
+    "heading": {
+      "main": "Schnelleres Edge-Computing",
+      "accent": "ohne Grenzen"
+    },
+    "description": "Fermyon Wasm Functions bietet eine schnellere Codeausführung zur Laufzeit, erweitert und beschleunigt CDNs über statisches Caching hinaus und ermöglicht dynamische, personalisierte Inhalte und Echtzeit-Verarbeitung am Edge.",
+    "performance": {
+      "heading": "Leistungsvergleich",
+      "unit": "(Antwortzeit in ms)",
+      "traditional": {
+        "title": "Standard serverlose Funktionen",
+        "time": "400ms",
+        "network": "Netzwerkzeit",
+        "compute": "Rechenzeit",
+        "note": "AWS Lambda, Azure Functions, etc"
+      },
+      "fermyon": {
+        "title": "Fermyon reduziert die Rechenzeit",
+        "time": "~220ms",
+        "advantage": "75% schnellere Berechnung"
+      },
+      "edge": {
+        "title": "Edge CDN reduziert die Netzwerkzeit",
+        "time": "~100ms",
+        "advantage": "75% schneller insgesamt"
+      },
+      "scale": {
+        "start": "0 ms",
+        "end": "400 ms"
+      },
+      "footnote": "Diese Leistungsvorteile ermöglichen neue Edge-native Anwendungsfälle auf Stackit, die Marktlösungen wie Cloudflare Workers und Fastly Compute@Edge mit schnelleren Kaltstarts, breiterer Sprachunterstützung und tieferer Stackit-Integration übertreffen."
+    },
+    "benefits": {
+      "heading": "Hauptvorteile",
+      "items": [
+        {
+          "title": "Unglaublich schnelle Berechnung",
+          "description": "Ausführungszeiten im Millisekundenbereich für überlegene Leistung am Edge."
+        },
+        {
+          "title": "Keine Kaltstarts",
+          "description": "Sofortige Initialisierung ohne die Verzögerungen, die herkömmliche serverlose Funktionen erfahren."
+        },
+        {
+          "title": "Keine zusätzlichen Infrastrukturkosten",
+          "description": "Alles in einer Plattform enthalten, ohne versteckte Infrastrukturkosten."
+        },
+        {
+          "title": "Breitere Sprachunterstützung",
+          "description": "Schreiben Sie Funktionen in JavaScript, Rust, Go, Python und anderen zu WebAssembly kompilierten Sprachen."
+        },
+        {
+          "title": "Skaliert vom Edge zum Kern",
+          "description": "Konsistentes Bereitstellungsmodell, egal ob am Edge oder in der Kerninfrastruktur ausgeführt."
+        },
+        {
+          "title": "Standardmäßig sicher",
+          "description": "Die Sandbox-Ausführungsumgebung von WebAssembly bietet starke Sicherheitsgarantien."
+        }
+      ]
+    },
+    "cta": "Vollständige Präsentation ansehen"
+  },
+  "demos": {
+    "heading": "Demos",
+    "description": "Sehen Sie Fermyon Wasm Functions in Aktion mit diesen Demos und Tutorials",
+    "viewDemoButton": "Demo ansehen",
+    "viewMoreButton": "Weitere Beispiele auf GitHub anzeigen"
+  },
+  "getStarted": {
+    "badge": "LOSLEGEN",
+    "heading": "Folgen Sie diesen einfachen Schritten",
+    "description": "Starten Sie mit Fermyon Wasm Functions in nur wenigen Minuten",
+    "steps": [
+      "Fordern Sie Zugriff auf Fermyon Wasm Functions über dieses Formular an: https://fibsu0jcu2g.typeform.com/fwf-preview",
+      "Erhalten Sie eine Bestätigungs-E-Mail vom Fermyon-Team",
+      "Besuchen Sie die Produktdokumentation: developer.fermyon.com/wasm-functions",
+      "Installieren Sie Spin und das Spin aka CLI-Plugin",
+      "Konfigurieren Sie eine Spin-Anwendung zur Bereitstellung",
+      "Melden Sie sich bei Fermyon Wasm Functions an (über GitHub-Authentifizierung)",
+      "Stellen Sie Ihre App mit spin aka deploy bereit"
+    ],
+    "appAvailability": "Ihre App wird unter https://<string>.aka.fermyon.tech verfügbar sein",
+    "docsButton": "Zur Schnellstart-Dokumentation",
+    "note": "Hinweis: Wenn Inhalte passwortgeschützt sind, verwenden Sie den Benutzernamen: fermyon und das Passwort: akamai"
+  },
+  "contact": {
+    "heading": "Kontakt zum Fermyon-Team",
+    "email": "E-Mail an uns: akamai@fermyon.com",
+    "webex": "Verbinden Sie sich auf Webex"
+  },
+  "faq": {
+    "heading": "Häufig gestellte Fragen",
+    "description": "Erhalten Sie Antworten auf häufige Fragen zu Fermyon Wasm Functions",
+    "items": [
+      {
+        "question": "Wie unterscheiden sich Wasm Functions von EdgeWorkers?",
+        "answer": "Fermyon Wasm Functions und EdgeWorkers sind beide ereignisgesteuerte serverlose Berechnungsprodukte, aber Fermyon Wasm Functions verwendet WebAssembly, um außergewöhnlich schnelle Kaltstartzeiten und ein starkes Sicherheitsmodell zu bieten. Für EdgeWorkers-Kunden, die die Leistung bei rechenintensiven Aufgaben optimieren möchten, können Fermyon Wasm Functions ihre bestehenden Workflows ergänzen, indem sie verbesserte Geschwindigkeit und Effizienz bieten, um die Latenz für Endbenutzer zu verringern."
+      },
+      {
+        "question": "Was unterscheidet dies von Cloudflare Workers oder Fastly Edge Compute?",
+        "answer": "Fermyon Wasm Functions kombiniert erstklassige Rechenleistung und Sprachunterstützung mit dem branchenführenden CDN von Stackit, um eine unglaublich niedrige Latenz für Ihre Endbenutzer zu erreichen. Fast alles, was auf CloudFlare Workers und Fastly Edge Compute gemacht werden kann, kann auch auf Fermyon Wasm Functions gemacht werden."
+      },
+      {
+        "question": "Können Wasm Functions bestehende Edge-Computing-Lösungen ersetzen oder ergänzen?",
+        "answer": "Fermyon Wasm Functions können bestehende Edge-Computing-Lösungen ergänzen, indem sie ultraschnelle Ausführungszeiten bieten und WebAssembly für verbesserte Leistung und Effizienz nutzen."
+      },
+      {
+        "question": "Wie integriert sich dies in die bestehende Infrastruktur der Kunden?",
+        "answer": "Fermyon Wasm Functions läuft nahtlos auf Linode Core- und Gecko-Knoten und verbessert bestehende Caching-, Routing- und Sicherheits-Workflows."
+      }
+    ],
+    "readMore": "Weitere häufig gestellte Fragen lesen"
+  },
+  "footer": {
+    "brand": "Fermyon Wasm Functions",
+    "copyright": "© {year} Fermyon Technologies, Inc. Alle Rechte vorbehalten.",
+    "poweredBy": "Unterstützt durch WebAssembly und Stackit"
+  }
+} 
